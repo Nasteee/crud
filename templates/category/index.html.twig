@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nos Catégories{% endblock %}
+
+{% block body %}
+    <h1 class="text-center">Nos Catégories</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                {% if app.user %}
+                <th>Actions</th>
+                {% endif %}
+            </tr>
+        </thead>
+        <tbody>
+        {% for category in categories %}
+            <tr>
+                <td>{{ category.id }}</td>
+                <td>{{ category.name }}</td>
+                {% if app.user %}
+
+                <td>
+                    {% for role in roles %}
+                        {% if role == 'ROLE_USER' %}
+                            <a href="{{ path('category_show', {'id': category.id}) }}"><button type="button" class="btn btn-info mb-2 ">Voir</button></a><br>
+                        {% endif %}
+                        {% if role == 'ROLE_ADMIN' %}
+                            <a href="{{ path('category_edit', {'id': category.id}) }}"><button type="button" class="btn btn-warning mb-2 ">Mise à jour</button></a><br>
+                            {{ include('category/_delete_form.html.twig') }}
+                        {% endif %}
+                    {% endfor %}
+                </td>
+                {% endif %}
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+
+    {% for role in roles %}
+        {% if role == 'ROLE_ADMIN' %}
+            <a href="{{ path('category_new') }}"><button type="button" class="btn btn-success mb-2 ">Nouvelle categorie</button></a>
+        {% endif %}
+    {% endfor %}
+{% endblock %}

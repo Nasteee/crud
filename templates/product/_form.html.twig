@@ -1,0 +1,35 @@
+{{ form_start(form, {'attr': {'class': ''}}) }}
+{#    {{ form_widget(form.name, {'attr' : {'class':'form-control', 'placeholder':'mon place '}}) }}#}
+<div class="row">
+    <div class="col-md-4 offset-4">
+        <label for="name">Nom</label>
+        {{ form_widget(form.name, {'attr' : {'class':'form-control ', 'name': 'name'}}) }}
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-4 offset-4">
+        <label for="price">Prix</label>
+        {{ form_widget(form.price, {'attr' : {'class':'form-control ', 'name': 'price'}}) }}
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-4 offset-4">
+        <label for="description">Description</label>
+        {{ form_widget(form.description, {'attr' : {'class':'form-control ', 'name': 'description'}}) }}
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-4 offset-4">
+        <label for="description">Image</label>
+        {{ form_widget(form.brochure, {'attr' : {'class':'form-control ', 'name': 'description'}}) }}
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-4 offset-4">
+        <label for="category">Categorie</label>
+        {{ form_widget(form.category, {'attr' : {'class':'form-control', 'name': 'category'}}) }}
+    </div>
+</div>
+
+    <button class="btn btn-success col-md-4 offset-4 mt-2 ">{{ button_label|default('Sauvegarder') }}</button>
+{{ form_end(form) }}
