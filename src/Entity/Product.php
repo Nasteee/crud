@@ -45,6 +45,21 @@ class Product
      */
     private $brochureFilename;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $stock;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $dateAdd;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $dateEnd;
+
 
     public function __construct()
     {
@@ -119,6 +134,42 @@ class Product
     public function setBrochureFilename(?string $brochureFilename): self
     {
         $this->brochureFilename = $brochureFilename;
+
+        return $this;
+    }
+
+    public function getStock(): ?int
+    {
+        return $this->stock;
+    }
+
+    public function setStock(int $stock): self
+    {
+        $this->stock = $stock;
+
+        return $this;
+    }
+
+    public function getDateAdd(): ?\DateTimeInterface
+    {
+        return $this->dateAdd;
+    }
+
+    public function setDateAdd(\DateTimeInterface $dateAdd): self
+    {
+        $this->dateAdd = $dateAdd;
+
+        return $this;
+    }
+
+    public function getDateEnd(): ?\DateTimeInterface
+    {
+        return $this->dateEnd;
+    }
+
+    public function setDateEnd(\DateTimeInterface $dateEnd): self
+    {
+        $this->dateEnd = $dateEnd;
 
         return $this;
     }

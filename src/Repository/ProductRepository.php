@@ -19,6 +19,17 @@ class ProductRepository extends ServiceEntityRepository
         parent::__construct($registry, Product::class);
     }
 
+    public function findStock()
+    {
+        return $this->createQueryBuilder('p')
+            ->where('p.stock >:stockmini')
+            ->setParameter('stockmini', 5)
+            ->getQuery()
+            ->getResult();
+
+
+    }
+
     // /**
     //  * @return Product[] Returns an array of Product objects
     //  */

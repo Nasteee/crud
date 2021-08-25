@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Product;
+use App\Entity\Category;
 use App\Form\ProductType;
 use App\Repository\ProductRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -18,7 +19,9 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 class ProductController extends AbstractController
 {
     /**
-     * @Route("/product", name="product_index", methods={"GET"})
+     * @Route("/product",
+     *     name="product_index",
+     *     methods={"GET"})
      */
     public function index(ProductRepository $productRepository, ?UserInterface $user): Response
     {
@@ -29,15 +32,20 @@ class ProductController extends AbstractController
             $username = "Non Connecté";
             $roles = ['ROLE_NA'];
         }
+
+        $productStock = $productRepository->findStock();
         return $this->render('product/index.html.twig', [
-            'products' => $productRepository->findAll(),
+//            'products' => $productRepository->findAll(),
+            'products' => $productStock,
             'user' => $username,
             'roles' => $roles,
         ]);
     }
 
     /**
-     * @Route("/admin/product/new", name="product_new", methods={"GET","POST"})
+     * @Route("/admin/product/new",
+     *     name="product_new",
+     *     methods={"GET","POST"})
      */
     public function new(Request $request, SluggerInterface $slugger): Response
     {
@@ -86,7 +94,9 @@ class ProductController extends AbstractController
 
 
     /**
-     * @Route("/product/{id}", name="product_show", methods={"GET"})
+     * @Route("/product/{id}",
+     *     name="product_show",
+     *     methods={"GET"})
      */
     public function show(Product $product, ?UserInterface $user): Response
     {
@@ -104,7 +114,9 @@ class ProductController extends AbstractController
     }
 
     /**
-     * @Route("/admin/product/{id}/edit", name="product_edit", methods={"GET","POST"})
+     * @Route("/admin/product/{id}/edit",
+     *     name="product_edit",
+     *     methods={"GET","POST"})
      */
     public function edit(Request $request, Product $product, SluggerInterface $slugger): Response
     {
@@ -152,9 +164,10 @@ class ProductController extends AbstractController
 
     }
 
-
     /**
-     * @Route("/admin/product/{id}", name="product_delete", methods={"POST"})
+     * @Route("/admin/product/{id}",
+     *     name="product_delete",
+     *     methods={"POST"})
      */
     public function delete(Request $request, Product $product): Response
     {
